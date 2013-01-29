@@ -13,7 +13,7 @@ var spawnCounters;
 var keyup = 38;
 var keydown = 40;
 var keyleft = 37;
-var keyright = 39;
+var keyright = 39; 
 var keyj = 74;
 var keyk = 75;
 var keyl = 76;
@@ -195,8 +195,16 @@ function startGame(){
 	splashScreenB.y = 200;
 	splashScreenB.scaleX = 0.17;
 	splashScreenB.scaleY = 0.17;
+
+
+	start_text = new Text("Press any key to start", "20px Englebert", "#FFF");
+	start_text.textAlign = "center";
+	start_text.x = (canvas.width/2);
+	start_text.y = (canvas.height-20);	
+
 	stage.addChild(splashScreenA);
 	stage.addChild(splashScreenB);
+	stage.addChild(start_text);
 	stage.update();
 }
 
@@ -211,6 +219,7 @@ function reset(level){
 	inGame=true;
 	stage.removeChild(splashScreenA);
 	stage.removeChild(splashScreenB);
+	stage.removeChild(start_text);
 	stage.update();
 	currentLevel = level;
 	gameObjects.removeAllChildren();
