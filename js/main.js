@@ -211,6 +211,11 @@ function startGame(){
 function gameOver(){
 	splashGameOver = new Bitmap(imageGameOver);	
 	stage.addChild(splashGameOver);
+	score_text = new Text("FINAL SCORE " + zeroPad(parseInt(points), 8), "40px Englebert", "#FFF");
+	score_text.textAlign = "center";
+	score_text.x = (canvas.width/2);
+	score_text.y = (canvas.height - 100);	
+	stage.addChild(score_text);
 	Ticker.setPaused(true);
 	stage.update();	
 }
