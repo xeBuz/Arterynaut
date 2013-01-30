@@ -84,15 +84,15 @@ function Destroy(i,arr){
 }
 
 function DestroyShot(i, tipo){
-	if (tipo = "rojo"){
+	if (tipo == "rojo"){
 		stage.removeChild(glob_rojos[i]);
 		glob_rojos.splice(i,1);
 	}
-	if (tipo = "blanco"){
+	if (tipo == "blanco"){
 		stage.removeChild(glob_blancos[i]);
 		glob_blancos.splice(i,1);
 	}
-	if (tipo = "plaqueta"){
+	if (tipo == "plaqueta"){
 		stage.removeChild(glob_plaquetas[i]);
 		glob_plaquetas.splice(i,1);
 	}

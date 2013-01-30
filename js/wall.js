@@ -26,7 +26,7 @@ function updateWall(walls){
 
 	for(var i=0; i<walls.length; i++){
 		var w = walls[i];
-		if(w.hp>=0)	w.alpha = w.hp/5;
+		w.alpha = w.alpha>=0?w.hp/5:0;
 		if(w.hp<=0){
 			w.isAlive = false;
 			if(w.hp<=-3)w.hp = -3;
