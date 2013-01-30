@@ -1,6 +1,7 @@
 function Bug(x,y,vx,vy,tipo){
 	var shape = new BitmapAnimation(spriteBichos);
-
+	if(shadows)shape.shadow = new Shadow("#243",0,5,2);
+	
 	switch(tipo){
 		case 1: 
 			shape.damage = 1; 
@@ -44,6 +45,7 @@ function Oxygen(x,y,vx,vy){
 	shape.regY = 5;
 	shape.x = x;
 	shape.y = y;
+	shape.alpha = 0.7;
 	shape.kill = false;
 	shape.r = 5;
 	shape.vx = vx;
@@ -94,7 +96,7 @@ function updateBugs(){
 		bg.y += bg.vy;
 		if(bg.hp<=0){
 			for(var j=0; j<8; j++){
-				Particle(bg.x,bg.y,"rgba(100,220,150,0.7)","rgba(40,220,70,1)",[Math.random()*8-4,Math.random()*8-4])
+				Particle(bg.x,bg.y,"rgba(100,220,150,0.3)","rgba(80,150,50,1)",[Math.random()*8-4,Math.random()*8-4])
 			}
 			Destroy(i,bichos);
 			return false;

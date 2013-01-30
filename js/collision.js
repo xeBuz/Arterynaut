@@ -62,12 +62,15 @@ function direction(x1,y1,x2,y2){
 
 function Particle(x,y,color1,color2,dir){
 	var shape = new Shape();
-	shape.graphics.beginFill(color1).drawCircle(0,0,4).beginFill(color2).drawCircle(0,0,3);
+	shape.graphics.beginFill(color1).drawCircle(0,0,6).beginFill(color2).drawCircle(0,0,3);
+	//shape.graphics.beginFill(color1).rect(-6,-6,12,12).beginFill(color2).rect(-3,-3,6,6);
 	shape.x = x;
 	shape.y = y;
 	shape.v = 20;
 	shape.vx = dir[0];
 	shape.vy = dir[1];
+	shape.snapToPixel = true;
+	shape.cache(-6,-6,12,12);
 	stage.addChild(shape);
 	particles.push(shape);
 	return shape;
@@ -79,6 +82,7 @@ function updateParticles(){
 		p.x += p.vx;
 		p.y += p.vy;
 		p.v -= 1;
+		p.v<10?p.alpha-=0.1:true;
 		if(p.v<=0){
 			Destroy(i,particles);
 		}

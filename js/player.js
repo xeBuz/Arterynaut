@@ -1,6 +1,7 @@
 
 function Player(x, y){
 	var anim = new BitmapAnimation(spriteSheet);
+	if(shadows)anim.shadow = new Shadow("#233",0,5,4);
 	anim.gotoAndPlay("move");//default animation
 	currentAnim = "move";//default current animation
 	anim.x = x;

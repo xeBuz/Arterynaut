@@ -4,6 +4,8 @@ var canvas;
 
 var inGame = false;
 
+var shadows = true;
+
 var player;//objeto del jugador
 var cosas;//array con objetos varios
 var gameObjects = new Container();//container con los objetos de la partida
@@ -56,7 +58,6 @@ function init(){
 	
 	contenedor = new Container();
 	stage.addChild (contenedor);
-	
 	
 	
 	points = 0;
@@ -248,11 +249,7 @@ function handleImageError(){
 }
 
 function tick(){
-	/*for(var i=0; i<cosas.length; i++){
-		var coso = cosas[i];
-		coso.x += coso.vx;
-		coso.y += coso.vy;
-	}*/
+
 	if(inGame){
 		setWidth(oxigenBar,-0.1);
 		updateParticles();
@@ -269,7 +266,7 @@ function tick(){
 }
 
 function sign(n){
-	return n?n>0?1:-1:0; //regex mofaca!!	
+	return n?n>0?1:-1:0;	
 }
 
 function handleKeyDown(e){//lo que pasa cuando el jugador toca una tecla

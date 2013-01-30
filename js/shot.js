@@ -135,7 +135,7 @@ function updateShot(){
 		if (collCircle(temp_rojo, bichos)) {
 			for(var j=0; j<3; j++){
 				var g = temp_rojo;
-				Particle(g.x,g.y,"rgba(100,10,30,0.7)","rgba(240,50,70,1)",[Math.random()*8-4,Math.random()*8-4])
+				Particle(g.x,g.y,"rgba(180,40,60,0.5)","rgba(240,50,70,1)",[Math.random()*8-4,Math.random()*8-4])
 			}	
 			DestroyShot(i, "rojo");
 		}
@@ -170,7 +170,7 @@ function updateShot(){
 		if (b != false) {	
 			for(var j=0; j<5; j++){
 				var g = temp_blanco;
-				Particle(g.x,g.y,"rgba(180,200,220,0.7)","rgba(180,200,220,1)",[Math.random()*8-4,Math.random()*8-4])
+				Particle(g.x,g.y,"rgba(180,200,220,0.3)","rgba(200,240,250,1)",[Math.random()*8-4,Math.random()*8-4])
 			}
 			console.log(b);
 			b.hp-=1;
