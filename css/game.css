@@ -4,3 +4,26 @@ canvas{
 	user-select:none;
 	/*background-color:#F04;*/
 }
+
+#fondo{
+	background-color: #DFD9BD;}
+
+#content{
+	width:800px}
+#share{
+	margin-top: 5px; 
+	background: #F2F2F2; 
+	border: 1px solid #CCCCCC; 
+	border-radius: 4px 0px 0px 4px; 
+	padding: 5px; 
+	position: fixed; 
+	width: 40px; 
+	margin-left: -53px;}
+
+#description{
+	width:800px; 
+	font-family: 'Englebert', sans-serif; 
+	font-size: 18px; 
+	padding: 20px; 
+	line-height: 26px; 
+	margin-bottom: 20px; }

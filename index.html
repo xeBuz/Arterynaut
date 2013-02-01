@@ -13,17 +13,26 @@
 	<audio autoplay loop ><source src="audio/heartbeat.mp3" type="audio/mp3" /></audio>
 	<audio autoplay loop ><source src="audio/Country.m4a" type="audio/mp3" /></audio> <!-- Sound by Alas Media https://soundcloud.com/alas-media/country -->	
 	
-<div align="center" style="background-color: #DFD9BD;">
-	<canvas id="canvas" width="800px" height="450px">
-	</canvas>
-	<div style="width:800px; font-family: 'Englebert', sans-serif; font-size: 18px;S padding: 20px; line-height: 26px; margin-bottom: 30px; margin-top:20px;"> 
-	You are the sheriff of the veins and blood vessels of a person. Your duty is to help its heart. </br>
-	Use  the arrow keys or WASD to move around and configure your bazooka.</br>
-	Use J to shoot white blood cells and kill bacterias and K to shoot red blood cells and grab oxygen.</br>
-	When bacteria hit a vein wall they weaken, use L to shoot platelet and prevent them from breaking.</br>
-	If you do this right, oxygen and health bars will maintain steady and you will help the heart.</br>
-	Good luck!</div>
-	<div style="height: 30px;"> </div>
+<div align="center" id="fondo">
+	
+	<div id="content">
+		<div id="share">
+		<a href="http://www.facebook.com/sharer.php?u=http://arterynaut.com.ar/" target="_blank" ><img src="img/Facebook-32.png" ></a>
+		<a href="http://twitter.com/share?text=Play%20Arterynaut!&url=http://arterynaut.com.ar/" target="_blank"><img src="img/Twitter-32.png" ></a>
+		</div>
+		
+		<canvas id="canvas" width="800px" height="450px"></canvas>
+		
+		<div id="description"> 
+		You are the sheriff of the veins and blood vessels of a person. Your duty is to help its heart. </br>
+		Use  the arrow keys or WASD to move around and configure your bazooka.</br>
+		Use J to shoot white blood cells and kill bacterias and K to shoot red blood cells and grab oxygen.</br>
+		When bacteria hit a vein wall they weaken, use L to shoot platelet and prevent them from breaking.</br>
+		If you do this right, oxygen and health bars will maintain steady and you will help the heart.</br>
+		Good luck!</div>
+
+		<div style="height: 30px;"> </div>
+	</div>
 	<script src="js/jquery-1.6.min.js"></script>
 	<script src="js/easeljs-0.5.0.min.js"></script>
 	<script src="js/soundjs-0.3.0.min.js"></script>
