@@ -2,6 +2,9 @@ var stage;
 var contenedor;
 var canvas;
 
+var preload;
+var canStart = false;
+
 var inGame = false;
 
 var shadows = true;
@@ -51,6 +54,10 @@ var spriteBichos;
 document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
+function handleLoadComplete(){
+	canStart = true;
+}
+
 function init(){
 	canvas = document.getElementById("canvas");
 	stage = new Stage(canvas);
@@ -58,8 +65,24 @@ function init(){
 	
 	contenedor = new Container();
 	stage.addChild (contenedor);
-	
-	
+
+	var manifest = [
+		{id:"shoot", src:"audio/shot.ogg", data:10},
+		{id:"impactbug1", src:"audio/impactbug1.ogg", data:6},
+		{id:"impactbug2", src:"audio/impactbug2.ogg", data:6},
+		{id:"impactoxy", src:"audio/impactoxy.ogg", data:2},
+		{id:"impactwall", src:"audio/impactbugwall.ogg", data:3},
+		{id:"brokenvein", src:"audio/shot.ogg", data:2},
+		{id:"hemorrhage", src:"audio/shot.ogg", data:1},
+		{id:"killedbug", src:"audio/bugdeath.ogg", data:3},
+		{id:"gameover", src:"audio/shot.ogg", data:1},
+	];
+
+	preload = new PreloadJS();
+	preload.onComplete = handleLoadComplete;
+	preload.installPlugin(SoundJS);
+	preload.loadManifest(manifest);
+
 	points = 0;
 	points_text = new Text("score", "25px Englebert", "#333");
 	points_text.textAlign = "center";
@@ -270,7 +293,7 @@ function sign(n){
 }
 
 function handleKeyDown(e){//lo que pasa cuando el jugador toca una tecla
-	if(!inGame){reset(0);}
+	if(!inGame && canStart){reset(0);}
 	switch(e.keyCode){
 		case keyj:
 			Shoot("globRojo");

@@ -1,5 +1,7 @@
 function Shot(x,y,dire, tipo){
 	//tipo: rojo, blanco, plaqueta
+	SoundJS.play("shoot",SoundJS.INTERRUPT_NONE);
+	
 	switch(tipo){
 		case "rojo":
 			var shape = new Bitmap(imageRojo);
@@ -72,7 +74,8 @@ function Shoot(glob){
 	    player.last_x = vx;
 	    player.last_y = vy;
 	}
-
+	
+	
 	if(glob == "globRojo")GlobuloRojo(player.x,player.y-10,[vx*10,vy*10]);
 	if(glob == "globBlanco")GlobuloBlanco(player.x,player.y-10,[vx*10,vy*10]);
 	if(glob == "Plaqueta")Plaqueta(player.x,player.y-10,[vx*10,vy*10]);
@@ -127,6 +130,7 @@ function updateShot(){
 			if(temp_rojo.oxigenado<3){
 				temp_rojo.oxigenado+=1;
 				oxi.kill = true;
+				SoundJS.play("impactoxy",SoundJS.INTERRUPT_NONE);
 			}
 			temp_rojo.vx*=0.7;
 			temp_rojo.vy*=0.7;
@@ -137,6 +141,7 @@ function updateShot(){
 				var g = temp_rojo;
 				Particle(g.x,g.y,"rgba(180,40,60,0.5)","rgba(240,50,70,1)",[Math.random()*8-4,Math.random()*8-4])
 			}	
+			SoundJS.play("impactbug2",SoundJS.INTERRUPT_NONE);
 			DestroyShot(i, "rojo");
 		}
 		if (temp_rojo.x < -300 || temp_rojo.y < upperWallY || temp_rojo.y > lowerWallY ) {
@@ -174,6 +179,7 @@ function updateShot(){
 			}
 			console.log(b);
 			b.hp-=1;
+			SoundJS.play("impactbug1",SoundJS.INTERRUPT_NONE);
 			DestroyShot(i, "blanco");
 			break;	
 		} 

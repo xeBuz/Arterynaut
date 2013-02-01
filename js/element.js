@@ -84,6 +84,7 @@ function updateBugs(){
 		if(wall && wall.isAlive){
 			wall.hp -= bg.damage;
 			BounceShot(bg);
+			SoundJS.play("impactwall",SoundJS.INTERRUPT_NONE);
 		}
 		/*if (collCircle(bg, glob_blancos)) {	
 			stage.removeChild(bichos[i]);
@@ -98,6 +99,7 @@ function updateBugs(){
 			for(var j=0; j<8; j++){
 				Particle(bg.x,bg.y,"rgba(100,220,150,0.3)","rgba(80,150,50,1)",[Math.random()*8-4,Math.random()*8-4])
 			}
+			SoundJS.play("killedbug",SoundJS.INTERRUPT_NONE);
 			Destroy(i,bichos);
 			return false;
 		}
