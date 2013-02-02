@@ -6,7 +6,7 @@ var preload;
 var canStart = false;
 
 var inGame = false;
-
+var sonidos = true;
 var shadows = true;
 
 var player;//objeto del jugador
@@ -26,6 +26,7 @@ var keyw = 87;
 var keys = 83;
 var keya = 65;
 var keyd = 68;
+var keyp = 80;
 
 var upperWallY = 60;
 var lowerWallY = 340;
@@ -67,15 +68,17 @@ function init(){
 	stage.addChild (contenedor);
 
 	var manifest = [
+		{id:"music", src:"audio/Country.ogg", data:1},
+		{id:"heartbeat", src:"audio/heartbeat.ogg", data:1},
 		{id:"shoot", src:"audio/shot.ogg", data:10},
 		{id:"impactbug1", src:"audio/impactbug1.ogg", data:6},
 		{id:"impactbug2", src:"audio/impactbug2.ogg", data:6},
 		{id:"impactoxy", src:"audio/impactoxy.ogg", data:2},
 		{id:"impactwall", src:"audio/impactbugwall.ogg", data:3},
-		{id:"brokenvein", src:"audio/shot.ogg", data:2},
-		{id:"hemorrhage", src:"audio/shot.ogg", data:1},
+		{id:"brokenvein", src:"audio/brokenvein.ogg", data:2},
+		{id:"hemorrhage", src:"audio/hemorrhage.ogg", data:1},
 		{id:"killedbug", src:"audio/bugdeath.ogg", data:3},
-		{id:"gameover", src:"audio/shot.ogg", data:1},
+		{id:"gameover", src:"audio/gameover.ogg", data:1},
 	];
 
 	preload = new PreloadJS();
@@ -83,6 +86,9 @@ function init(){
 	preload.installPlugin(SoundJS);
 	preload.loadManifest(manifest);
 
+	if(sonidos)SoundJS.play("music",SoundJS.INTERRUPT_NONE,0,0,-1,1,0);	
+	if(sonidos)SoundJS.play("heartbeat",SoundJS.INTERRUPT_NONE,0,0,-1,1,0);
+		
 	points = 0;
 	points_text = new Text("score", "25px Englebert", "#333");
 	points_text.textAlign = "center";
@@ -233,6 +239,7 @@ function startGame(){
 }
 
 function gameOver(){
+	SoundJS.play("gameover",SoundJS.INTERRUPT_NONE);
 	splashGameOver = new Bitmap(imageGameOver);	
 	stage.addChild(splashGameOver);
 	score_text = new Text("FINAL SCORE " + zeroPad(parseInt(points), 8), "40px Englebert", "#FFF");
@@ -292,6 +299,19 @@ function sign(n){
 	return n?n>0?1:-1:0;	
 }
 
+function stopSounds(){	
+	if(sonidos){
+		SoundJS.stop();
+		sonidos=false;
+		return false;
+	}else{
+		SoundJS.play("music",SoundJS.INTERRUPT_NONE,0,0,-1,1,0);	
+		SoundJS.play("heartbeat",SoundJS.INTERRUPT_NONE,0,0,-1,1,0)
+		sonidos=true;
+		return false;
+	}
+}
+
 function handleKeyDown(e){//lo que pasa cuando el jugador toca una tecla
 	if(!inGame && canStart){reset(0);}
 	switch(e.keyCode){
@@ -305,6 +325,10 @@ function handleKeyDown(e){//lo que pasa cuando el jugador toca una tecla
 			Shoot("Plaqueta");
 			return false;			
 		
+		case keyp:
+			stopSounds();
+			return false;
+			
 		
 		case keyup:
 		case keyw:

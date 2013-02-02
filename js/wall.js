@@ -28,7 +28,11 @@ function updateWall(walls){
 		var w = walls[i];
 		w.alpha = w.alpha>=0?w.hp/5:0;
 		if(w.hp<=0){
-			w.isAlive = false;
+			if(sonidos)SoundJS.play("hemorrhage",SoundJS.INTERRUPT_NONE);
+			if(w.isAlive){
+				if(sonidos)SoundJS.play("brokenvein",SoundJS.INTERRUPT_NONE);
+				w.isAlive = false;
+			}
 			if(w.hp<=-3)w.hp = -3;
 		}else{
 			w.isAlive = true;

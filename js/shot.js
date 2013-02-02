@@ -1,6 +1,6 @@
 function Shot(x,y,dire, tipo){
 	//tipo: rojo, blanco, plaqueta
-	SoundJS.play("shoot",SoundJS.INTERRUPT_NONE);
+	if(sonidos)SoundJS.play("shoot",SoundJS.INTERRUPT_NONE);
 	
 	switch(tipo){
 		case "rojo":
@@ -130,7 +130,7 @@ function updateShot(){
 			if(temp_rojo.oxigenado<3){
 				temp_rojo.oxigenado+=1;
 				oxi.kill = true;
-				SoundJS.play("impactoxy",SoundJS.INTERRUPT_NONE);
+				if(sonidos)SoundJS.play("impactoxy",SoundJS.INTERRUPT_NONE);
 			}
 			temp_rojo.vx*=0.7;
 			temp_rojo.vy*=0.7;
@@ -141,7 +141,7 @@ function updateShot(){
 				var g = temp_rojo;
 				Particle(g.x,g.y,"rgba(180,40,60,0.5)","rgba(240,50,70,1)",[Math.random()*8-4,Math.random()*8-4])
 			}	
-			SoundJS.play("impactbug2",SoundJS.INTERRUPT_NONE);
+			if(sonidos)SoundJS.play("impactbug2",SoundJS.INTERRUPT_NONE);
 			DestroyShot(i, "rojo");
 		}
 		if (temp_rojo.x < -300 || temp_rojo.y < upperWallY || temp_rojo.y > lowerWallY ) {
@@ -179,7 +179,7 @@ function updateShot(){
 			}
 			console.log(b);
 			b.hp-=1;
-			SoundJS.play("impactbug1",SoundJS.INTERRUPT_NONE);
+			if(sonidos)SoundJS.play("impactbug1",SoundJS.INTERRUPT_NONE);
 			DestroyShot(i, "blanco");
 			break;	
 		} 
