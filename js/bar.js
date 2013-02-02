@@ -12,18 +12,22 @@ function Bar(x, color, tipo){ //tipo 1=oxigen tipo 2=health
 
 function setWidth(bar, valor)
 {
-	//console.log(bar.w);
 	bar.w = bar.w + valor;
-	if(bar.w >360) bar.w = 360;
-	//console.log(bar.w, valor);
-	if (bar.tipo == 1)
-	{	
-		bar.x = bar.x-valor;
+	if(bar.w > 360) {
+		bar.w = 360;
+		bar.x = 15;
+	} else {	
+		if (bar.tipo == 1)
+		{	
+			bar.x = bar.x-valor;
+		}
 	}
+	
 	if(bar.w <= 0){
 		gameOver();
 		return false;
 	}
+
 	bar.graphics.clear();
 	bar.graphics.beginFill(bar.color).drawRoundRect(0, 0, bar.w, bar.h,20);
 }
