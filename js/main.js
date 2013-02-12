@@ -232,10 +232,10 @@ function gameOver(){
 function reset(level){
 
 	for(wall in upperWall){
-		wall.hp = 10;
+		upperWall[wall].hp = 5;
 	}
 	for(wall in lowerWall){
-		wall.hp = 5;
+		lowerWall[wall].hp = 5;
 	}
 
 	oxigenBar = Bar(15, '#59A9C2', 1);
