@@ -16,7 +16,7 @@ function Player(x, y){
 	last_x = 0;
 	last_y = 0;
 	anim.currentFrame = 0;
-	stage.addChild(anim);
+	gameObjects.addChild(anim);
 	return anim;
 }
 

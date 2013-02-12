@@ -1,5 +1,5 @@
 function Brick(x,y){
-	brick = new Bitmap(imageBrick);
+	brick = new Bitmap(images["brick"]);
 	brick.w = 40;
 	brick.h = 10;
 	brick.x = x;

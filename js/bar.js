@@ -23,7 +23,7 @@ function setWidth(bar, valor)
 		}
 	}
 	
-	if(bar.w <= 0){
+	if(bar.w <= 0 ){
 		gameOver();
 		return false;
 	}
@@ -31,3 +31,5 @@ function setWidth(bar, valor)
 	bar.graphics.clear();
 	bar.graphics.beginFill(bar.color).drawRoundRect(0, 0, bar.w, bar.h,20);
 }
+
+

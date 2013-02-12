@@ -4,18 +4,18 @@ function Shot(x,y,dire, tipo){
 	
 	switch(tipo){
 		case "rojo":
-			var shape = new Bitmap(imageRojo);
+			var shape = new Bitmap(images["globrojo"]);
 			shape.oxigenado = 0;
 			glob_rojos.push(shape);
 			break;
 			return false;
 		case "blanco":
-			var shape = new Bitmap(imageBlanco);
+			var shape = new Bitmap(images["globblanco"]);
 			glob_blancos.push(shape);
 			break;
 			return false;
 		case "plaqueta":
-			var shape = new Bitmap(imagePlaqueta);
+			var shape = new Bitmap(images["plaqueta"]);
 			glob_plaquetas.push(shape);
 			break;
 			return false;		
@@ -30,7 +30,7 @@ function Shot(x,y,dire, tipo){
 	type = tipo;
 	shape.life = 60;	
 	shape.snapToPixel = true;	
-	stage.addChild(shape);
+	gameObjects.addChild(shape);
 }
 function GlobuloRojo(x,y,dire){
 	if (ValidateAmount() == true){
@@ -82,21 +82,21 @@ function Shoot(glob){
 }
 
 function Destroy(i,arr){
-	stage.removeChild(arr[i]);
+	gameObjects.removeChild(arr[i]);
 	arr.splice(i,1);
 }
 
 function DestroyShot(i, tipo){
 	if (tipo == "rojo"){
-		stage.removeChild(glob_rojos[i]);
+		gameObjects.removeChild(glob_rojos[i]);
 		glob_rojos.splice(i,1);
 	}
 	if (tipo == "blanco"){
-		stage.removeChild(glob_blancos[i]);
+		gameObjects.removeChild(glob_blancos[i]);
 		glob_blancos.splice(i,1);
 	}
 	if (tipo == "plaqueta"){
-		stage.removeChild(glob_plaquetas[i]);
+		gameObjects.removeChild(glob_plaquetas[i]);
 		glob_plaquetas.splice(i,1);
 	}
 }

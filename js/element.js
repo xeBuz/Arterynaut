@@ -35,12 +35,12 @@ function Bug(x,y,vx,vy,tipo){
 	shape.snapToPixel = true;
 	//shape.cache(-10,-10,20,20);
 	bichos.push(shape);
-	stage.addChild(shape);
+	gameObjects.addChild(shape);
 	return shape;
 }
 
 function Oxygen(x,y,vx,vy){
-	var shape = new Bitmap(imageOxigeno);
+	var shape = new Bitmap(images["oxygeno"]);
 	shape.regX = 5;
 	shape.regY = 5;
 	shape.x = x;
@@ -53,7 +53,7 @@ function Oxygen(x,y,vx,vy){
 	shape.snapToPixel = true;
 	//shape.cache(0,0,10,10);
 	oxygens.push(shape);
-	stage.addChild(shape);
+	gameObjects.addChild(shape);
 	return shape;
 }
 
@@ -87,7 +87,7 @@ function updateBugs(){
 			if(sonidos)SoundJS.play("impactwall",SoundJS.INTERRUPT_NONE);
 		}
 		/*if (collCircle(bg, glob_blancos)) {	
-			stage.removeChild(bichos[i]);
+			gameObjects.removeChild(bichos[i]);
 			bichos.splice(i,1);bg.
 			break;	
 		} */

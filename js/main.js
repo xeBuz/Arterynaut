@@ -9,6 +9,8 @@ var inGame = false;
 var sonidos = true;
 var shadows = true;
 
+var images = {};
+
 var player;//objeto del jugador
 var cosas;//array con objetos varios
 var gameObjects = new Container();//container con los objetos de la partida
@@ -31,7 +33,7 @@ var keyp = 80;
 var upperWallY = 60;
 var lowerWallY = 340;
 
-var imageSheet = new Image();//Imagen para el spritesheet
+/*var imageSheet = new Image();//Imagen para el spritesheet
 var imageBackground = new Image();//Imagen para el fondo
 var imageCorazon = new Image();
 var imageBrick = new Image();
@@ -50,14 +52,27 @@ var imageGameOver = new Image();
 //objeto spritesheet 
 var spriteSheet; 
 var spriteCorazon;
-var spriteBichos;
+var spriteBichos;*/
 
 document.onkeydown = handleKeyDown;
 document.onkeyup = handleKeyUp;
 
+
 function handleLoadComplete(){
 	canStart = true;
+	startGame();
 }
+
+function handleFileLoad(event){
+
+	if(event.type == "image"){
+		var image = new Image();
+		image.src = event.src;
+		image.onload = handleImageLoad;
+		images[event.id] = image;
+	}
+}
+
 
 function init(){
 	canvas = document.getElementById("canvas");
@@ -79,9 +94,22 @@ function init(){
 		{id:"hemorrhage", src:"audio/hemorrhage.ogg", data:1},
 		{id:"killedbug", src:"audio/bugdeath.ogg", data:3},
 		{id:"gameover", src:"audio/gameover.ogg", data:1},
+		{id:"arterynaut", src:"img/arterynaut.png"},
+		{id:"gameover", src:"img/gameover.png"},
+		{id:"arterynaut-logo", src:"img/arterynaut-logo.png"},
+		{id:"vaquero48", src:"img/vaquero48.png"},
+		{id:"vena", src:"img/vena.jpg"},
+		{id:"corazon", src:"img/corazon.png"},
+		{id:"brick", src:"img/brick.jpg"},
+		{id:"globrojo", src:"img/globrojo.png"},
+		{id:"globblanco", src:"img/globblanco.png"},
+		{id:"plaqueta", src:"img/plaqueta.png"},
+		{id:"bichos", src:"img/bichos.png"},
+		{id:"oxygeno", src:"img/oxygeno.png"},
 	];
 
-	preload = new PreloadJS();
+	preload = new PreloadJS(false); 
+	preload.onFileLoad = handleFileLoad;
 	preload.onComplete = handleLoadComplete;
 	preload.installPlugin(SoundJS);
 	preload.loadManifest(manifest);
@@ -89,61 +117,17 @@ function init(){
 	if(sonidos)SoundJS.play("music",SoundJS.INTERRUPT_NONE,0,0,-1,1,0);	
 	if(sonidos)SoundJS.play("heartbeat",SoundJS.INTERRUPT_NONE,0,0,-1,1,0);
 		
-	points = 0;
 	points_text = new Text("score", "25px Englebert", "#333");
 	points_text.textAlign = "center";
 	points_text.x = (700);
 	points_text.y = 10;	
 	stage.addChild(points_text);
 
-	imageSheet.onload = handleImageLoad;
-	imageSheet.onerror = handleImageError;
-	imageSheet.src = "img/vaquero48.png";
-	
-	imageBackground.onload = handleImageLoad;
-	imageBackground.onerror = handleImageError;
-	imageBackground.src = "img/vena.jpg";
-	
-	imageCorazon.onload = handleImageLoad;
-	imageCorazon.onerror = handleImageError;
-	imageCorazon.src = "img/corazon.png";
-	
-	imageBrick.onload = handleImageLoad;
-	imageBrick.onerror = handleImageError;
-	imageBrick.src = "img/brick.jpg";
-	
-	imageRojo.onload = handleImageLoad;
-	imageRojo.onerror = handleImageError;
-	imageRojo.src = "img/globrojo.png";
-	
-	imageBlanco.onload = handleImageLoad;
-	imageBlanco.onerror = handleImageError;
-	imageBlanco.src = "img/globblanco.png";
-	
-	imagePlaqueta.onload = handleImageLoad;
-	imagePlaqueta.onerror = handleImageError;
-	imagePlaqueta.src = "img/plaqueta.png";	
-	
-	imageBichos.onload = handleImageLoad;
-	imageBichos.onerror = handleImageError;
-	imageBichos.src = "img/bichos.png";		
-	
-	imageOxigeno.onload = handleImageLoad;
-	imageOxigeno.onerror = handleImageError;
-	imageOxigeno.src = "img/oxygeno.png";
-	 	
-	imageSplashscreenA.onload = handleImageLoad;
-	imageSplashscreenA.onerror = handleImageError;
-	imageSplashscreenA.src = "img/arterynaut.png";
+}
 
-	imageSplashscreenB.onload = handleImageLoad;
-	imageSplashscreenB.onerror = handleImageError;
-	imageSplashscreenB.src = "img/arterynaut-logo.png";
-		
-	imageGameOver.onload = handleImageLoad;
-	imageGameOver.onerror = handleImageError;
-	imageGameOver.src = "img/gameover.png";
-		
+
+function startGame(){
+
 	upperWall = Wall(50);
 	lowerWall = Wall(340);
 	
@@ -154,7 +138,7 @@ function init(){
 	contenedor.addChild(header);
 	
 
-	vena = new Bitmap(imageBackground);
+	vena = new Bitmap(images["vena"]);
 	vena.x = 0;
 	vena.y = 60;
 	vena.alpha = 0.8
@@ -175,15 +159,9 @@ function init(){
 	bar.graphics.beginStroke("#000").beginFill('#333').drawRoundRect(0, 0, bar.w, bar.h, 20);
 	contenedor.addChild(bar);
 	
-	oxigenBar = Bar(15, '#59A9C2', 1);
-	contenedor.addChild(oxigenBar);
-	healthBar = Bar(425, '#BA0002', 2);
-	contenedor.addChild(healthBar);
-	//setWidth(oxigenBar, 50);
-	//setWidth(healthBar, 50);
-	   
+
 	spriteSheet = new SpriteSheet({
-		images: [imageSheet],
+		images: [images["vaquero48"]],
 		frames: {width:48, height:48, regX:24, regY:24},
 		animations:{
 			move:[0,3,"move",4],
@@ -192,7 +170,7 @@ function init(){
 	});
 	
 	spriteCorazon = new SpriteSheet({
-		images: [imageCorazon],
+		images: [images["corazon"]],
 		frames: {width:90, height:90, regX:45, regY:45},
 		animations:{
 			beat:[0,3,"beat",9],
@@ -200,7 +178,7 @@ function init(){
 	});
 	
 	spriteBichos = new SpriteSheet({
-		images: [imageBichos],
+		images: [images["bichos"]],
 		frames: {width:32, height:32, regX:16, regY:16},
 		animations:{
 			debil:[3,5,"debil",4],
@@ -212,15 +190,11 @@ function init(){
 	heart = Heart();
 	stage.addChild(heart);
 	
-	startGame();
 
 	stage.addChild(gameObjects)
 	
-}
-
-function startGame(){
-	splashScreenA = new Bitmap(imageSplashscreenA);
-	splashScreenB = new Bitmap(imageSplashscreenB);
+	splashScreenA = new Bitmap(images["arterynaut"]);
+	splashScreenB = new Bitmap(images["arterynaut-logo"]);
 	splashScreenB.x = 70;
 	splashScreenB.y = 200;
 	splashScreenB.scaleX = 0.17;
@@ -238,21 +212,40 @@ function startGame(){
 	stage.update();
 }
 
+
 function gameOver(){
-	SoundJS.play("gameover",SoundJS.INTERRUPT_NONE);
-	splashGameOver = new Bitmap(imageGameOver);	
-	stage.addChild(splashGameOver);
+	inGame = false;	
+	gameObjects.removeAllChildren();
+	if(sonidos)SoundJS.play("gameover",SoundJS.INTERRUPT_NONE);
+	splashGameOver = new Bitmap(images["gameover"]);	
+	gameObjects.addChild(splashGameOver);
 	score_text = new Text("FINAL SCORE " + zeroPad(parseInt(points), 8), "40px Englebert", "#FFF");
 	score_text.textAlign = "center";
 	score_text.x = (canvas.width/2);
 	score_text.y = (canvas.height - 100);	
-	stage.addChild(score_text);
-	Ticker.setPaused(true);
-	stage.update();	
+	gameObjects.addChild(score_text);
+	//Ticker.setPaused(true);
+	stage.update();
 }
 
+
 function reset(level){
+
+	for(wall in upperWall){
+		wall.hp = 10;
+	}
+	for(wall in lowerWall){
+		wall.hp = 5;
+	}
+
+	oxigenBar = Bar(15, '#59A9C2', 1);
+	contenedor.addChild(oxigenBar);
+	healthBar = Bar(425, '#BA0002', 2);
+	contenedor.addChild(healthBar);
+
 	inGame=true;
+
+	points = 0;
 	stage.removeChild(splashScreenA);
 	stage.removeChild(splashScreenB);
 	stage.removeChild(start_text);
@@ -273,10 +266,11 @@ function reset(level){
 }
 
 
-function handleImageLoad(){
+function handleImageLoad(e){
 }
 function handleImageError(){
 }
+
 
 function tick(){
 
@@ -295,9 +289,11 @@ function tick(){
 	}
 }
 
+
 function sign(n){
 	return n?n>0?1:-1:0;	
 }
+
 
 function stopSounds(){	
 	if(sonidos){
@@ -311,6 +307,7 @@ function stopSounds(){
 		return false;
 	}
 }
+
 
 function handleKeyDown(e){//lo que pasa cuando el jugador toca una tecla
 	if(!inGame && canStart){reset(0);}
@@ -344,6 +341,7 @@ function handleKeyDown(e){//lo que pasa cuando el jugador toca una tecla
 			player.down=true;break;
 	}
 }
+
 
 function handleKeyUp(e){// lo que pasa cuando el jugador suelta una tecla
 	switch(e.keyCode){
